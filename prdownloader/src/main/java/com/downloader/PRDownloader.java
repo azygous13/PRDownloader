@@ -54,17 +54,18 @@ public class PRDownloader {
      */
     public static void initialize(Application app) {
         PRDownloader.app = app;
-        initialize(app.getApplicationContext(), PRDownloaderConfig.newBuilder().build());
+        initialize(app, PRDownloaderConfig.newBuilder().build());
     }
 
     /**
      * Initializes PRDownloader with the custom config.
      *
-     * @param context The context
+     * @param app Application
      * @param config  The PRDownloaderConfig
      */
-    public static void initialize(Context context, PRDownloaderConfig config) {
-        ComponentHolder.getInstance().init(context, config);
+    public static void initialize(Application app, PRDownloaderConfig config) {
+        PRDownloader.app = app;
+        ComponentHolder.getInstance().init(app.getApplicationContext(), config);
         DownloadRequestQueue.initialize();
     }
 

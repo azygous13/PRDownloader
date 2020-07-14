@@ -20,7 +20,8 @@ public class FileDownloadRandomAccessFile implements FileDownloadOutputStream {
     private FileDownloadRandomAccessFile(File file) throws IOException {
         randomAccess = new RandomAccessFile(file, "rw");
         fd = randomAccess.getFD();
-        out = new BufferedOutputStream(PRDownloader.getApplicationContext().openFileOutput(file.getName(), Context.MODE_PRIVATE));
+        FileOutputStream fileOutputStream = PRDownloader.getApplicationContext().openFileOutput(file.getName().replace(".temp", ""), Context.MODE_PRIVATE);
+        out = new BufferedOutputStream(fileOutputStream);
     }
 
     @Override
