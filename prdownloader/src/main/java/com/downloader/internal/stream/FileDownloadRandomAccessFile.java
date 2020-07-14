@@ -1,5 +1,9 @@
 package com.downloader.internal.stream;
 
+import android.content.Context;
+
+import com.downloader.PRDownloader;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -16,7 +20,7 @@ public class FileDownloadRandomAccessFile implements FileDownloadOutputStream {
     private FileDownloadRandomAccessFile(File file) throws IOException {
         randomAccess = new RandomAccessFile(file, "rw");
         fd = randomAccess.getFD();
-        out = new BufferedOutputStream(new FileOutputStream(randomAccess.getFD()));
+        out = new BufferedOutputStream(PRDownloader.getApplicationContext().openFileOutput(file.getName(), Context.MODE_PRIVATE));
     }
 
     @Override

@@ -20,6 +20,7 @@ package com.downloader;
  * Created by amitshekhar on 12/11/17.
  */
 
+import android.app.Application;
 import android.content.Context;
 
 import com.downloader.core.Core;
@@ -35,6 +36,11 @@ import com.downloader.utils.Utils;
  */
 public class PRDownloader {
 
+    private static Application app;
+
+    public static Context getApplicationContext() {
+        return app.getApplicationContext();
+    }
     /**
      * private constructor to prevent instantiation of this class
      */
@@ -44,10 +50,11 @@ public class PRDownloader {
     /**
      * Initializes PRDownloader with the default config.
      *
-     * @param context The context
+     * @param app Application
      */
-    public static void initialize(Context context) {
-        initialize(context, PRDownloaderConfig.newBuilder().build());
+    public static void initialize(Application app) {
+        PRDownloader.app = app;
+        initialize(app.getApplicationContext(), PRDownloaderConfig.newBuilder().build());
     }
 
     /**
